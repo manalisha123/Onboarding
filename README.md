@@ -28,26 +28,58 @@ and are not a substitute for this environment.
 ## Project structure
 
 ```text
-src/
-  api/                 Shared API request helper
-  config/              Local environment files (not committed)
-  constants/           Production URLs, selectors, and login states
-  fixtures/            Shared API and page fixtures
-  pages/               Page objects and login-state helpers
-  tests/
-    api/               API response and profile-schema tests
-    scalable-products.spec.ts
-                       Product, registration, and mocked onboarding tests
-    production-2fa-link.spec.ts
-                       Checks against the live production site
-    production-login-state.test.ts
-                       Offline login-state detection test
-
-playwright.config.ts   Playwright projects and reporters
-reports/              Generated HTML report output
-allure-results/       Generated Allure results
-test-results/         Test-run artifacts
+.
+├── src/
+│   ├── api/
+│   │   └── ApiHelper.ts
+│   ├── config/              Local environment files (not committed)
+│   ├── constants/
+│   │   ├── index.ts
+│   │   ├── production.ts
+│   │   └── states.ts
+│   ├── fixtures/
+│   │   ├── apiFixtures.ts
+│   │   └── pageFixtures.ts
+│   ├── pages/
+│   │   ├── AgenticPage.ts
+│   │   ├── CreditPage.ts
+│   │   ├── InterestPage.ts
+│   │   ├── InvestPage.ts
+│   │   ├── ProductionLoginState.ts
+│   │   ├── RegistrationDialog.ts
+│   │   ├── RetirementPage.ts
+│   │   ├── ScalableHomePage.ts
+│   │   ├── ScalableProductPage.ts
+│   │   └── index.ts
+│   └── tests/
+│       ├── api/
+│       │   ├── scalable.auth.spec.ts
+│       │   └── users.api.schema.spec.ts
+│       ├── production-2fa-link.spec.ts
+│       ├── production-login-state.test.ts
+│       └── scalable-products.spec.ts
+├── playwright.config.ts     Playwright projects and reporters
+├── package.json             Project dependencies and test scripts
+├── package-lock.json        Locked dependency versions
+├── jenkinsfile               CI pipeline
+├── tsconfig.json             TypeScript configuration
+├── README.md                Setup, configuration, and test documentation
+├── reports/                 Generated HTML report output
+├── allure-results/          Generated Allure results
+└── test-results/            Test-run artifacts
 ```
+
+All application support code and tests are part of this single Playwright
+project. The directories under `src/` have these responsibilities:
+
+| Path | Responsibility |
+| --- | --- |
+| `src/api/` | Shared API request utilities. |
+| `src/config/` | Environment-specific local settings, selected by `ENV`. |
+| `src/constants/` | Shared production configuration and login-state definitions. |
+| `src/fixtures/` | Shared Playwright fixtures for API and page tests. |
+| `src/pages/` | Page objects, registration dialog, and login-state helper. |
+| `src/tests/` | Playwright and Node test suites. |
 
 ## Requirements
 
